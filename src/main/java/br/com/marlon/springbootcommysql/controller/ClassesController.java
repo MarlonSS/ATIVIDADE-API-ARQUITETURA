@@ -25,8 +25,7 @@ public class ClassesController {
     @PostMapping("/")
     public void postClasses(@RequestBody ClassesRq classes) {
         var c = new Classes();
-        c.setName(classes.getName());
-        c.;
-        alunoRepository.save(p);
+
+
     }
 }
