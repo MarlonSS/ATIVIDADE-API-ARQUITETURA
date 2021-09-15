@@ -1,8 +1,11 @@
 package br.com.marlon.springbootcommysql.controller.dto;
 
 import br.com.marlon.springbootcommysql.model.Course;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 public class CourseRs {
     private Long id;
     private String name;
@@ -18,35 +21,5 @@ public class CourseRs {
         return c;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTurn() {
-        return turn;
-    }
-
-    public void setTurn(String turn) {
-        this.turn = turn;
-    }
-
-    public String getWorkload() {
-        return workload;
-    }
-
-    public void setWorkload(String workload) {
-        this.workload = workload;
-    }
 }

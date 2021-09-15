@@ -1,8 +1,17 @@
 package br.com.marlon.springbootcommysql.model;
 /*import javax.persistence.*;*/
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "Classes")
 public class Classes{
@@ -12,32 +21,13 @@ public class Classes{
     private Long id;
     @Column(name="name")
     private String name;
-    @ManyToOne
+    @Transient
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="id_course")
     private Course course;
 
-    public Course getCourse() {
-        return course;
-    }
 
-    public void setCourse(Course course) {
+    public Classes(Course course) {
         this.course = course;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
 }

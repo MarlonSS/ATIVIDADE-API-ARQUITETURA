@@ -21,12 +21,8 @@ public class AlunoController {
     }
 
     @GetMapping("/")
-    public List<AlunoRs> findAll() {
-        var pessoas = alunoRepository.findAll();
-        return pessoas
-                .stream()
-                .map(AlunoRs::converter)
-                .collect(Collectors.toList());
+    public List<Aluno> findAll() {
+        return alunoRepository.findAll();
     }
 
     @PostMapping("/")
