@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,5 +25,6 @@ public class Course {
     @Column(name="workload")
     private String workload;
 
-
+   @OneToMany(fetch = FetchType.LAZY, targetEntity = Classes.class, cascade = CascadeType.ALL)
+    private List<Classes> classes;
 }

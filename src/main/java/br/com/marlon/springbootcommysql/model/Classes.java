@@ -21,9 +21,8 @@ public class Classes{
     private Long id;
     @Column(name="name")
     private String name;
-    @Transient
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="id_course")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_course",  referencedColumnName = "id")
     private Course course;
 
 

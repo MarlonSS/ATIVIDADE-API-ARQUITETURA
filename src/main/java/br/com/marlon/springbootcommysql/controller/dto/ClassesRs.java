@@ -5,20 +5,22 @@ import br.com.marlon.springbootcommysql.model.Course;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 public class ClassesRs {
+
     private Long id;
     private String name;
-    private Course idcourse;
+    private Course course;
 
-
-    public static ClassesRs converter(Classes c) {
-        var classes = new ClassesRs();
-        classes.setId(c.getId());
-        classes.setName(c.getName());
-        classes.setIdcourse(c.getCourse());
-        return classes;
+    public static ClassesRs converter(Classes classes) {
+        var c = new ClassesRs();
+        c.setId(classes.getId());
+        c.setName(classes.getName());
+        c.setCourse(classes.getCourse());
+        c.getCourse().getClasses().clear();
+        return c;
     }
-
 }

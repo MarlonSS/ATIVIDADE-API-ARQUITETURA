@@ -68,7 +68,7 @@ public class CourseController {
             var courseSave = p.get();
             courseRepository.delete(courseSave);
         } else {
-            throw new Exception("Aluno Não encontrada");
+            throw new Exception("Curso Não encontrada");
         }
     }
 
