@@ -20,7 +20,6 @@ public class ClassesRs {
         c.setId(classes.getId());
         c.setName(classes.getName());
         c.setCourse(classes.getCourse());
-        c.getCourse().getClasses().clear();
         return c;
     }
 }

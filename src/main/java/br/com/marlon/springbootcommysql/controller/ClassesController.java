@@ -3,19 +3,11 @@ package br.com.marlon.springbootcommysql.controller;
 import br.com.marlon.springbootcommysql.controller.dto.ClassesRq;
 
 import br.com.marlon.springbootcommysql.controller.dto.ClassesRs;
-import br.com.marlon.springbootcommysql.controller.dto.CourseRq;
-import br.com.marlon.springbootcommysql.controller.dto.CourseRs;
 import br.com.marlon.springbootcommysql.model.Classes;
 import br.com.marlon.springbootcommysql.repository.ClassesRepository;
-import javassist.NotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
+
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.rmi.ServerException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +15,6 @@ import java.util.stream.Collectors;
 @RequestMapping("turma")
 public class ClassesController {
     private final ClassesRepository classesRepository;
-
 
     public ClassesController(ClassesRepository classesRepository) {
         this.classesRepository = classesRepository;
@@ -48,8 +39,9 @@ public class ClassesController {
         var c = classesRepository.findById(id);
 
         if (c.isPresent()) {
-            var courseSave = c.get();
-            courseSave.setName(classesRq.getName());
+            var classesSave = c.get();
+            classesSave.setName(classesRq.getName());
+            classesRepository.save(classesSave);
         } else {
             throw new Exception("Turma Não encontrada");
         }
@@ -63,13 +55,12 @@ public class ClassesController {
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping("Delete")
-    public void DeleteAluno(@PathVariable("") Long id, @RequestBody ClassesRq classesRq) throws Exception {
+    @DeleteMapping("/")
+    public void deleteClasses(@RequestParam("id") Long id) throws Exception {
         var p = classesRepository.findById(id);
 
         if (p.isPresent()) {
-            var courseSave = p.get();
-            classesRepository.delete(courseSave);
+            classesRepository.deleteById(id);
         } else {
             throw new Exception("turma Não encontrada");
         }

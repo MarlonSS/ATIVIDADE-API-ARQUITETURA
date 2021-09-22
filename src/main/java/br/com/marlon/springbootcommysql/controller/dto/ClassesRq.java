@@ -11,5 +11,4 @@ import javax.persistence.Table;
 @Setter
 public class ClassesRq{
     private String name;
-    private Long course;
 }

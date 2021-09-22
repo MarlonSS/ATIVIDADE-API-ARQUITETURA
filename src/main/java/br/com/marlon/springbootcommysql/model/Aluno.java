@@ -1,10 +1,14 @@
 package br.com.marlon.springbootcommysql.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Aluno")
 @Getter
@@ -23,7 +27,7 @@ public class Aluno {
     private String matricula;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="id_turma")
+    @JoinColumn(name="id_turma", referencedColumnName = "id")
     private Classes classes;
 
 }

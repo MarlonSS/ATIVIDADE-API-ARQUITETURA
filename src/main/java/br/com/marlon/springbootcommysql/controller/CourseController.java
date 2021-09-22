@@ -60,15 +60,14 @@ public class CourseController {
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping("Delete")
-    public void DeleteAluno(@PathVariable("") Long id, @RequestBody CourseRq courseRq) throws Exception {
+    @DeleteMapping("/")
+    public void deleteClasses(@RequestParam("id") Long id) throws Exception {
         var p = courseRepository.findById(id);
 
         if (p.isPresent()) {
-            var courseSave = p.get();
-            courseRepository.delete(courseSave);
+            courseRepository.deleteById(id);
         } else {
-            throw new Exception("Curso Não encontrada");
+            throw new Exception("turma Não encontrada");
         }
     }
 

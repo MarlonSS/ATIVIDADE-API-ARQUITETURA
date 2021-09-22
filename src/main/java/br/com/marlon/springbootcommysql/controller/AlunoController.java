@@ -3,7 +3,9 @@ package br.com.marlon.springbootcommysql.controller;
 import br.com.marlon.springbootcommysql.controller.dto.AlunoRq;
 import br.com.marlon.springbootcommysql.controller.dto.AlunoRs;
 import br.com.marlon.springbootcommysql.model.Aluno;
+import br.com.marlon.springbootcommysql.model.Classes;
 import br.com.marlon.springbootcommysql.repository.AlunoRepository;
+import com.sun.jdi.connect.LaunchingConnector;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,11 +28,12 @@ public class AlunoController {
     }
 
     @PostMapping("/")
-    public void postAluno(@RequestBody AlunoRq aluno) {
-        var p = new Aluno();
-        p.setNome(aluno.getNome());
-        p.setMatricula(aluno.getMatricula());
-        alunoRepository.save(p);
+    public void postClasses(@RequestBody Aluno aluno) throws Exception {
+        if (aluno == null) {
+            throw new Exception("Não há nada.");
+        } else {
+            alunoRepository.save(aluno);
+        }
     }
 
     @PutMapping("/{id}")
@@ -55,15 +58,14 @@ public class AlunoController {
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping("Delete")
-    public void DeleteAluno(@PathVariable("") Long id, @RequestBody AlunoRq alunoRq) throws Exception {
+    @DeleteMapping("/")
+    public void deleteAluno(@RequestParam("id") Long id) throws Exception {
         var p = alunoRepository.findById(id);
 
         if (p.isPresent()) {
-            var alunoSave = p.get();
-            alunoRepository.delete(alunoSave);
+            alunoRepository.deleteById(id);
         } else {
-            throw new Exception("Aluno Não encontrada");
+            throw new Exception("turma Não encontrada");
         }
     }
 
